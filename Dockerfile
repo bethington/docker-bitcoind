@@ -41,6 +41,7 @@ RUN cd ~ \
  && ./configure CPPFLAGS="-I/root/build/include/ -O2" LDFLAGS="-L/root/build/lib/" --with-gui=no \
  && make \
  && make install \
+ && cd ~ \
  && rm -R build \
  && rm -R bitcoin
 
