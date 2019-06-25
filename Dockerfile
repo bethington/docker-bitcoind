@@ -3,7 +3,7 @@ FROM ubuntu:18.04
 MAINTAINER Ben Ethington <benaminde@gmail.com>
 
 ARG VERSION
-ENV VERSION ${VERSION:"v0.18.0"}
+ENV VERSION ${VERSION:'v0.18.0'}
 
 # Install necessary tools and libraries
 RUN apt-get update
