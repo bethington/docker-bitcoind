@@ -11,8 +11,8 @@ RUN apt-get update \
                     && automake pkg-config bsdmainutils python3 \
 	            && libssl-dev libevent-dev libboost-system-dev \
 	            && libboost-filesystem-dev libboost-chrono-dev \
-	            && libboost-test-dev libboost-thread-dev \
- && mkdir /bitcoin \
+	            && libboost-test-dev libboost-thread-dev
+RUN mkdir /bitcoin \
  && cd /bitcoin \
  && wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz \
  && tar -xvf db-4.8.30.NC.tar.gz \
