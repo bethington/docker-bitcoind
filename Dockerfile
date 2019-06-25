@@ -8,7 +8,7 @@ RUN apt-get -y install git nano curl wget
 RUN apt-get -y install build-essential libtool autotools-dev automake pkg-config bsdmainutils python3 \
  && apt-get clean
 RUN apt-get -y install libssl-dev libevent-dev libboost-system-dev libboost-filesystem-dev \
-                    && libboost-chrono-dev libboost-test-dev libboost-thread-dev \
+                       libboost-chrono-dev libboost-test-dev libboost-thread-dev \
  && apt-get clean
 
 # Install BerkeleyDB 4.8 to maintain binary wallet compatibility
