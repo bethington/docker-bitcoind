@@ -3,7 +3,7 @@ FROM ubuntu:xenial
 MAINTAINER Ben Ethington <benaminde@gmail.com>
 
 RUN apt-get update && apt-get upgrade \
-              && apt-get install git nano curl cmake build-essential \
+              && apt-get -y install git nano curl cmake build-essential \
 	      && libtool autotools-dev g++-multilib libtool \
 	      && binutils-gold bsdmainutils pkg-config \
               && automake pkg-config bsdmainutils python3 \
