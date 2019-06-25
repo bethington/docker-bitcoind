@@ -8,15 +8,16 @@ RUN apt-get -y install build-essential libtool autotools-dev automake pkg-config
 #RUN apt-get -y install libssl-dev libevent-dev libboost-system-dev \
 #	            && libboost-filesystem-dev libboost-chrono-dev \
 #	            && libboost-test-dev libboost-thread-dev
-#RUN mkdir /bitcoin \
-# && cd /bitcoin \
-# && wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz \
-# && tar -xvf db-4.8.30.NC.tar.gz \
-# && cd db-4.8.30.NC/build_unix \
-# && mkdir -p build \
-# && export BDB_PREFIX="/bitcoin/build" \
-# && ../dist/configure --disable-shared --enable-cxx --with-pic --prefix=$BDB_PREFIX \
-# && make install
+RUN mkdir /bitcoin \
+ && cd /bitcoin
+
+RUN wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz \
+ && tar -xvf db-4.8.30.NC.tar.gz \
+ && cd db-4.8.30.NC/build_unix \
+ && mkdir -p build \
+ && export BDB_PREFIX="/bitcoin/build" \
+ && ../dist/configure --disable-shared --enable-cxx --with-pic --prefix=$BDB_PREFIX \
+ && make install
 
 #ENV HOME /bitcoin
 
