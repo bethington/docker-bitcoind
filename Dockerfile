@@ -2,6 +2,7 @@
 FROM ubuntu:18.04
 MAINTAINER Ben Ethington <benaminde@gmail.com>
 
+# Install necessary tools and libraries
 RUN apt-get update
 RUN apt-get -y install git nano curl wget
 RUN apt-get -y install build-essential libtool autotools-dev automake pkg-config bsdmainutils python3 \
@@ -10,6 +11,7 @@ RUN apt-get -y install libssl-dev libevent-dev libboost-system-dev libboost-file
                     && libboost-chrono-dev libboost-test-dev libboost-thread-dev \
  && apt-get clean
 
+# Install BerkeleyDB 4.8 to maintain binary wallet compatibility
 RUN cd ~ \
  && wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz \
  && tar -xvf db-4.8.30.NC.tar.gz \
@@ -22,20 +24,18 @@ RUN cd ~ \
  && export BDB_LIB_PATH="/usr/local/BerkeleyDB.4.8/lib" \
  && ln -s /usr/local/BerkeleyDB.4.8/lib/libdb-4.8.so /usr/lib/libdb-4.8.so
  
+# Block and Transaction Broadcasting with ZeroMQ
+RUN sudo apt-get install libzmq3-dev \
+ && apt-get clean
+ 
+# Compile download and bitcoind
 RUN cd / \
  && git clone https://github.com/bitcoin/bitcoin.git --branch v0.18.0 --single-branch
+ && cd /bitcoin
  && ./autogen.sh \
- && ./configure CPPFLAGS="-I${BDB_PREFIX}/include/ -O2" LDFLAGS="-L${BDB_PREFIX}/lib/" --with-gui=no --disable-wallet
-
-#ENV HOME /bitcoin
-
-# add user with specified (or default) user/group ids
-#ENV PUID ${PUID:-1000}
-#ENV PGID ${PGID:-1000}
-
-# add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
-#RUN groupadd -g ${PGID} bitcoin \
-#	&& useradd -u ${PUID} -g bitcoin -s /bin/bash -m -d /bitcoin bitcoin
+ && ./configure CPPFLAGS="-I${BDB_PREFIX}/include/ -O2" LDFLAGS="-L${BDB_PREFIX}/lib/" --with-gui=no \
+ && make \
+ && make install
 
 VOLUME /bitcoin
 
