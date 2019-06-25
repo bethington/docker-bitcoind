@@ -2,14 +2,15 @@
 FROM ubuntu:xenial
 MAINTAINER Ben Ethington <benaminde@gmail.com>
 
-RUN apt-get update && apt-get upgrade \
-              && apt-get -y install git nano curl cmake build-essential \
-	      && libtool autotools-dev g++-multilib libtool \
-	      && binutils-gold bsdmainutils pkg-config \
-              && automake pkg-config bsdmainutils python3 \
-	      && libssl-dev libevent-dev libboost-system-dev \
-	      && libboost-filesystem-dev libboost-chrono-dev \
-	      && libboost-test-dev libboost-thread-dev
+RUN apt-get update \
+ && apt-get upgrade \
+ && apt-get -y install git nano curl cmake build-essential \
+	            && libtool autotools-dev g++-multilib libtool \
+	            && binutils-gold bsdmainutils pkg-config \
+                    && automake pkg-config bsdmainutils python3 \
+	            && libssl-dev libevent-dev libboost-system-dev \
+	            && libboost-filesystem-dev libboost-chrono-dev \
+	            && libboost-test-dev libboost-thread-dev
 
 #ENV HOME /bitcoin
 
