@@ -30,8 +30,8 @@ RUN sudo apt-get install libzmq3-dev \
  
 # Compile download and bitcoind
 RUN cd / \
- && git clone https://github.com/bitcoin/bitcoin.git --branch v0.18.0 --single-branch
- && cd /bitcoin
+ && git clone https://github.com/bitcoin/bitcoin.git --branch v0.18.0 --single-branch \
+ && cd /bitcoin \
  && ./autogen.sh \
  && ./configure CPPFLAGS="-I${BDB_PREFIX}/include/ -O2" LDFLAGS="-L${BDB_PREFIX}/lib/" --with-gui=no \
  && make \
