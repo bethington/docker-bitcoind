@@ -1,4 +1,4 @@
-# Run to build docker image: docker build --build-arg VERSION="v0.18.0" -t bethington/bitcoind .
+# Run to build docker image: docker build --build-arg VERSION="v0.18.0" -t bethington/bitcoind:v0.18.0 .
 FROM ubuntu:18.04
 MAINTAINER Ben Ethington <benaminde@gmail.com>
 
