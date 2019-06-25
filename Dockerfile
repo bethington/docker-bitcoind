@@ -2,14 +2,9 @@
 FROM ubuntu:18.04
 MAINTAINER Ben Ethington <benaminde@gmail.com>
 
-ARG VERSION
-ARG PARAMS
-ENV VERSION ${VERSION}
-ENV PARAMS ${PARAMS}
-
 # Install necessary tools and libraries
 RUN apt-get update
-RUN apt-get -y install git nano curl wget
+RUN apt-get -y install git nano curl wget net-tools
 RUN apt-get -y install build-essential libtool autotools-dev automake pkg-config bsdmainutils python3 \
  && apt-get clean
 RUN apt-get -y install libssl-dev libevent-dev libboost-system-dev libboost-filesystem-dev \
@@ -31,7 +26,10 @@ RUN cd ~ \
 # Block and Transaction Broadcasting with ZeroMQ
 RUN apt-get -y install libzmq3-dev \
  && apt-get clean
- 
+
+ARG VERSION
+ENV VERSION ${VERSION}
+
 # Compile download and bitcoind
 RUN cd ~ \
  && git clone https://github.com/bitcoin/bitcoin.git --branch ${VERSION} --single-branch \
@@ -49,4 +47,7 @@ EXPOSE 8332 8333
 
 WORKDIR /bitcoin
 
-CMD bitcoind -datadir=/bitcoin -server -rest ${PARAMS}
+ARG PARAMS
+ENV PARAMS ${PARAMS}
+
+CMD bitcoind -datadir=/bitcoin -server=1 -rest=1 -rpcuser=user -rpcpassword=pass ${PARAMS}
