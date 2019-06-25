@@ -35,7 +35,7 @@ RUN cd / \
  && git clone https://github.com/bitcoin/bitcoin.git --branch ${VERSION} --single-branch \
  && cd /bitcoin \
  && ./autogen.sh \
- && ./configure CPPFLAGS="-I${BDB_PREFIX}/include/ -O2" LDFLAGS="-L${BDB_PREFIX}/lib/" --with-gui=no \
+ && ./configure CPPFLAGS="-I/root/build/include/ -O2" LDFLAGS="-L/root/build/lib/" --with-gui=no \
  && make \
  && make install
 
