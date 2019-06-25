@@ -25,7 +25,7 @@ RUN cd ~ \
  && ln -s /usr/local/BerkeleyDB.4.8/lib/libdb-4.8.so /usr/lib/libdb-4.8.so
  
 # Block and Transaction Broadcasting with ZeroMQ
-RUN apt-get install libzmq3-dev \
+RUN apt-get -y install libzmq3-dev \
  && apt-get clean
  
 # Compile download and bitcoind
