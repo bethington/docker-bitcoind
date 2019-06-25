@@ -4,7 +4,6 @@ MAINTAINER Ben Ethington <benaminde@gmail.com>
 
 RUN apt-get update \
  && apt-get upgrade \
- && add-apt-repository universe \
  && apt-get -y install git nano curl cmake build-essential \
 	            && libtool-bin autotools-dev g++-multilib libtool \
 	            && binutils-gold bsdmainutils pkg-config \
