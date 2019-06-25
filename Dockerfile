@@ -3,7 +3,7 @@ FROM ubuntu:18.04
 MAINTAINER Ben Ethington <benaminde@gmail.com>
 
 RUN apt-get update
-RUN apt-get -y install git nano curl
+RUN apt-get -y install git nano curl wget
 RUN apt-get -y install build-essential libtool autotools-dev automake pkg-config bsdmainutils python3
 #RUN apt-get -y install libssl-dev libevent-dev libboost-system-dev \
 #	            && libboost-filesystem-dev libboost-chrono-dev \
