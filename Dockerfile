@@ -20,8 +20,7 @@ RUN cd ~ \
  && export BDB_PREFIX="/root/build" \
  && ../dist/configure --disable-shared --enable-cxx --with-pic --prefix=$BDB_PREFIX \
  && make install \
- && export BDB_INCLUDE_PATH="/usr/local/BerkeleyDB.4.8/include" \
- && export BDB_LIB_PATH="/usr/local/BerkeleyDB.4.8/lib" \
+ && echo 'BDB_PREFIX="/root/build"' >> /etc/environment \
  && ln -s /usr/local/BerkeleyDB.4.8/lib/libdb-4.8.so /usr/lib/libdb-4.8.so
  
 # Block and Transaction Broadcasting with ZeroMQ
