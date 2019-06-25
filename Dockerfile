@@ -6,9 +6,9 @@ RUN apt-get update
 RUN apt-get -y install git nano curl wget
 RUN apt-get -y install build-essential libtool autotools-dev automake pkg-config bsdmainutils python3 \
  && apt-get clean
-#RUN apt-get -y install libssl-dev libevent-dev libboost-system-dev \
-#	            && libboost-filesystem-dev libboost-chrono-dev \
-#	            && libboost-test-dev libboost-thread-dev
+RUN apt-get -y install libssl-dev libevent-dev libboost-system-dev libboost-filesystem-dev \
+                    && libboost-chrono-dev libboost-test-dev libboost-thread-dev \
+ && apt-get clean
 
 RUN cd ~ \
  && wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz \
@@ -24,6 +24,8 @@ RUN cd ~ \
  
 RUN cd / \
  && git clone https://github.com/bitcoin/bitcoin.git --branch v0.18.0 --single-branch
+ && ./autogen.sh \
+ && ./configure CPPFLAGS="-I${BDB_PREFIX}/include/ -O2" LDFLAGS="-L${BDB_PREFIX}/lib/" --with-gui=no --disable-wallet
 
 #ENV HOME /bitcoin
 
