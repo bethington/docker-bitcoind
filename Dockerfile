@@ -1,16 +1,26 @@
 # Run to build docker image: docker build -t bethington/bitcoind .
-FROM ubuntu:xenial
+FROM ubuntu:18.04
 MAINTAINER Ben Ethington <benaminde@gmail.com>
 
 RUN apt-get update \
  && apt-get upgrade \
+ && add-apt-repository universe \
  && apt-get -y install git nano curl cmake build-essential \
 	            && libtool autotools-dev g++-multilib libtool \
 	            && binutils-gold bsdmainutils pkg-config \
                     && automake pkg-config bsdmainutils python3 \
 	            && libssl-dev libevent-dev libboost-system-dev \
 	            && libboost-filesystem-dev libboost-chrono-dev \
-	            && libboost-test-dev libboost-thread-dev
+	            && libboost-test-dev libboost-thread-dev \
+ && mkdir /bitcoin \
+ && cd /bitcoin \
+ && wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz \
+ && tar -xvf db-4.8.30.NC.tar.gz \
+ && cd db-4.8.30.NC/build_unix \
+ && mkdir -p build \
+ && export BDB_PREFIX="/bitcoin/build" \
+ && ../dist/configure --disable-shared --enable-cxx --with-pic --prefix=$BDB_PREFIX \
+ && make install
 
 #ENV HOME /bitcoin
 
