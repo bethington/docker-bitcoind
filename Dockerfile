@@ -3,6 +3,7 @@ FROM ubuntu:18.04
 MAINTAINER Ben Ethington <benaminde@gmail.com>
 
 ARG VERSION
+ENV VERSION ${VERSION:v0.18.0}
 
 # Install necessary tools and libraries
 RUN apt-get update
@@ -31,7 +32,7 @@ RUN apt-get -y install libzmq3-dev \
  
 # Compile download and bitcoind
 RUN cd / \
- && git clone https://github.com/bitcoin/bitcoin.git --branch ${VERSION:"v0.18.0"} --single-branch \
+ && git clone https://github.com/bitcoin/bitcoin.git --branch ${VERSION} --single-branch \
  && cd /bitcoin \
  && ./autogen.sh \
  && ./configure CPPFLAGS="-I${BDB_PREFIX}/include/ -O2" LDFLAGS="-L${BDB_PREFIX}/lib/" --with-gui=no \
