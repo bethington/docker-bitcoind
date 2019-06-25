@@ -6,7 +6,7 @@ RUN apt-get update \
  && apt-get upgrade \
  && add-apt-repository universe \
  && apt-get -y install git nano curl cmake build-essential \
-	            && libtool autotools-dev g++-multilib libtool \
+	            && libtool-bin autotools-dev g++-multilib libtool \
 	            && binutils-gold bsdmainutils pkg-config \
                     && automake pkg-config bsdmainutils python3 \
 	            && libssl-dev libevent-dev libboost-system-dev \
