@@ -1,3 +1,4 @@
+# Run to build docker image: docker build -t bethington/bitcoind .
 FROM ubuntu:xenial
 MAINTAINER Ben Ethington <benaminde@gmail.com>
 
