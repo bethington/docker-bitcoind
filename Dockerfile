@@ -1,6 +1,8 @@
-# Run to build docker image: docker build -t bethington/bitcoind .
+# Run to build docker image: docker build --build-arg VERSION="v0.18.0" -t bethington/bitcoind .
 FROM ubuntu:18.04
 MAINTAINER Ben Ethington <benaminde@gmail.com>
+
+ARG VERSION
 
 # Install necessary tools and libraries
 RUN apt-get update
@@ -29,7 +31,7 @@ RUN apt-get -y install libzmq3-dev \
  
 # Compile download and bitcoind
 RUN cd / \
- && git clone https://github.com/bitcoin/bitcoin.git --branch v0.18.0 --single-branch \
+ && git clone https://github.com/bitcoin/bitcoin.git --branch ${VERSION:v0.18.0} --single-branch \
  && cd /bitcoin \
  && ./autogen.sh \
  && ./configure CPPFLAGS="-I${BDB_PREFIX}/include/ -O2" LDFLAGS="-L${BDB_PREFIX}/lib/" --with-gui=no \
@@ -38,7 +40,7 @@ RUN cd / \
 
 VOLUME /bitcoin
 
-EXPOSE 8332 8333 18332 18333
+EXPOSE 8332 8333
 
 WORKDIR /bitcoin
 
