@@ -1,4 +1,7 @@
-# Run to build docker image: docker build --build-arg VERSION=v0.18.0 --build-arg PARAMS=-testnet -t bethington/bitcoind:v0.18.0 .
+# Run to build docker image mainnet:
+#   docker build --build-arg VERSION=v0.18.0 --build-arg -t bethington/bitcoind:v0.18.0 .
+# Run to build docker image testnet:
+#   docker build --build-arg VERSION=v0.18.0 --build-arg PARAMS=-testnet -t bethington/bitcoind:v0.18.0 .
 FROM ubuntu:18.04
 MAINTAINER Ben Ethington <benaminde@gmail.com>
 
