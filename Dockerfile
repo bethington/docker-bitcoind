@@ -3,14 +3,12 @@ FROM ubuntu:18.04
 MAINTAINER Ben Ethington <benaminde@gmail.com>
 
 RUN apt-get update \
- && apt-get upgrade \
- && apt-get -y install git nano curl cmake build-essential \
-	            && autotools-dev g++-multilib libtool \
-	            && binutils-gold bsdmainutils pkg-config \
-                    && automake pkg-config bsdmainutils python3 \
-	            && libssl-dev libevent-dev libboost-system-dev \
-	            && libboost-filesystem-dev libboost-chrono-dev \
-	            && libboost-test-dev libboost-thread-dev
+ && apt-get upgrade
+RUN apt-get -y install git nano curl
+RUN apt-get -y install build-essential libtool autotools-dev automake pkg-config bsdmainutils python3
+#RUN apt-get -y install libssl-dev libevent-dev libboost-system-dev \
+#	            && libboost-filesystem-dev libboost-chrono-dev \
+#	            && libboost-test-dev libboost-thread-dev
 #RUN mkdir /bitcoin \
 # && cd /bitcoin \
 # && wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz \
