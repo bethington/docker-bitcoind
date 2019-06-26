@@ -54,4 +54,4 @@ WORKDIR /bitcoin
 ARG PARAMS
 ENV PARAMS ${PARAMS}
 
-CMD bitcoind -datadir=/bitcoin -server=1 -rest=1 -rpcallowip==0.0.0.0/0 -rpcuser=user -rpcpassword=pass ${PARAMS}
+CMD bitcoind -datadir=/bitcoin -server=1 -rest=1 -rpcallowip==172.31.0.0/16 -rpcuser=user -rpcpassword=pass ${PARAMS}
