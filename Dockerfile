@@ -53,8 +53,5 @@ EXPOSE 8332 8333
 
 WORKDIR /bitcoin
 
-ARG PARAMS
-ENV PARAMS ${PARAMS}
-
 # Must use rpcbind and rpcallowip to access RPC and REST externally
 CMD bitcoind -datadir=/bitcoin -conf=/bitcoin/bitcoin.conf
