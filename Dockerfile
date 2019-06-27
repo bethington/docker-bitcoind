@@ -3,7 +3,7 @@
 # Run to build docker image testnet:
 #   docker build --build-arg VERSION=v0.18.0 --build-arg PARAMS=-testnet -t bethington/bitcoind:v0.18.0-testnet .
 # Must use bitcoin as the container name like so:
-#   docker run --name bitcoin -p 9332:9332 -p 9333:9333 -v ./data:/data bethington/bitcoind
+#   docker run --name bitcoin -p 9332:9332 -p 9333:9333 -e USER=MyUser -e PASS=MyPass -v ./data:/data bethington/bitcoind
 FROM ubuntu:18.04
 MAINTAINER Ben Ethington <benaminde@gmail.com>
 
