@@ -54,4 +54,4 @@ EXPOSE 8332 8333
 WORKDIR /bitcoin
 
 # Must use rpcbind and rpcallowip to access RPC and REST externally
-CMD bitcoind -datadir=/bitcoin/data
+CMD bitcoind
