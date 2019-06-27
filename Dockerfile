@@ -47,11 +47,11 @@ RUN cd ~ \
  && rm -R build \
  && rm -R bitcoin
 
-VOLUME /bitcoin
+VOLUME /root/.bitcoin
 
 EXPOSE 8332 8333
 
-WORKDIR /bitcoin
+WORKDIR /root/.bitcoin
 
 # Must use rpcbind and rpcallowip to access RPC and REST externally
 CMD bitcoind
