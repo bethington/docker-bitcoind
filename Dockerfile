@@ -7,6 +7,16 @@
 FROM ubuntu:18.04
 MAINTAINER Ben Ethington <benaminde@gmail.com>
 
+ENV HOME /bitcoin
+
+# add user with specified (or default) user/group ids
+ENV USER_ID ${USER_ID:-1000}
+ENV GROUP_ID ${GROUP_ID:-1000}
+
+# add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
+RUN groupadd -g ${GROUP_ID} bitcoin \
+	&& useradd -u ${USER_ID} -g bitcoin -s /bin/bash -m -d /bitcoin bitcoin
+
 # Install necessary tools and libraries
 RUN apt-get update
 RUN apt-get -y install git nano curl wget net-tools
@@ -47,11 +57,11 @@ RUN cd ~ \
  && rm -R build \
  && rm -R bitcoin
 
-VOLUME /root/.bitcoin
+VOLUME /bitcoin
 
-EXPOSE 8332 8333
+EXPOSE 8332 8333 18332 18333
 
-WORKDIR /root/.bitcoin
+WORKDIR /bitcoin
 
 # Must use rpcbind and rpcallowip to access RPC and REST externally
-CMD bitcoind -datadir=/root/.bitcoin/data
+CMD bitcoind -datadir=/bitcoin/data
