@@ -18,7 +18,7 @@ ENV GROUP_ID ${GROUP_ID:-1000}
 
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
 RUN groupadd -g ${GROUP_ID} bitcoin \
-	&& useradd -u ${USER_ID} -g bitcoin -s /bin/bash -m -d /bitcoin bitcoin
+	&& useradd -u ${USER_ID} -g bitcoin -s /bin/bash -m -d $HOME bitcoin
 
 # Install necessary tools and libraries
 RUN apt-get update
@@ -30,14 +30,14 @@ RUN apt-get -y install libssl-dev libevent-dev libboost-system-dev libboost-file
  && apt-get clean
 
 # Install BerkeleyDB 4.8 to maintain binary wallet compatibility
-RUN cd ~ \
+RUN cd $HOME \
  && wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz \
  && tar -xvf db-4.8.30.NC.tar.gz \
  && cd db-4.8.30.NC/build_unix \
  && mkdir -p build \
- && ../dist/configure --disable-shared --enable-cxx --with-pic --prefix=/root/build \
+ && ../dist/configure --disable-shared --enable-cxx --with-pic --prefix=$HOME/build \
  && make install \
- && cd ~ \
+ && cd $HOME \
  && rm -R db-4.8.30.NC \
  && rm db-4.8.30.NC.tar.gz
  
@@ -49,22 +49,22 @@ ARG VERSION
 ENV VERSION ${VERSION}
 
 # Compile download and bitcoind
-RUN cd ~ \
+RUN cd $HOME \
  && git clone https://github.com/bitcoin/bitcoin.git --branch ${VERSION} --single-branch \
  && cd bitcoin \
  && ./autogen.sh \
- && ./configure CPPFLAGS="-I/root/build/include/ -O2" LDFLAGS="-L/root/build/lib/" --with-gui=no \
+ && ./configure CPPFLAGS="-I$HOME/build/include/ -O2" LDFLAGS="-L$HOME/build/lib/" --with-gui=no \
  && make \
  && make install \
- && cd ~ \
+ && cd $HOME \
  && rm -R build \
  && rm -R bitcoin
 
-VOLUME /bitcoin
+VOLUME $HOME
 
 EXPOSE 8332 8333 18332 18333
 
-WORKDIR /bitcoin
+WORKDIR $HOME
 
 # Must use rpcbind and rpcallowip to access RPC and REST externally
-CMD bitcoind -datadir=/bitcoin/data
+CMD bitcoind -datadir=$HOME/data
