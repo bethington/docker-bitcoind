@@ -1,5 +1,6 @@
 # docker-bitcoind
 Bitcoind Docker image that runs the Bitcoin node in a container for easy deployment. Builds from GitHub repo at https://github.com/bitcoin/bitcoin.
+ * Bitcoin documentation main list https://bitcoin.org/en/developer-documentation
  * Bitcoin documentation on Running A Full Node at https://bitcoin.org/en/full-node
  * Bitcoin documentation on Bitcoin Developer Reference at https://bitcoin.org/en/developer-reference
  * Bitcoin documentation on P2P Network at https://bitcoin.org/en/p2p-network-guide
