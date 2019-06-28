@@ -67,4 +67,4 @@ EXPOSE 8332 8333 18332 18333
 WORKDIR $HOME
 
 # Must use rpcbind and rpcallowip to access RPC and REST externally
-CMD bitcoind -datadir=$HOME/data
+CMD bitcoind
