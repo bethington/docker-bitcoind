@@ -1,5 +1,7 @@
 # docker-bitcoind
 Bitcoind Docker image that runs the Bitcoin node in a container for easy deployment. Builds from GitHub repo at https://github.com/bitcoin/bitcoin.
+ * Who Controls Bitcoin Core? https://medium.com/@lopp/who-controls-bitcoin-core-c55c0af91b8a
+ * Gitian building https://github.com/bitcoin-core/docs/blob/master/gitian-building.md
  * Bitcoin documentation main list https://bitcoin.org/en/developer-documentation
  * Bitcoin documentation on Running A Full Node at https://bitcoin.org/en/full-node
  * Bitcoin documentation on Bitcoin Developer Reference at https://bitcoin.org/en/developer-reference
